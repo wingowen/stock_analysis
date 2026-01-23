@@ -11,13 +11,35 @@
 
 ## 安装步骤
 1. 克隆项目
-2. 安装依赖：`pip install -r requirements.txt`
-3. 安装 Playwright 浏览器：`playwright install`
-4. 配置 Supabase：在 `.env` 文件中设置 URL 和 API Key
-5. 在 Supabase 中执行 `supabase_schema.sql` 创建表
+2. 安装依赖：`uv sync`
+3. 安装 Playwright 浏览器：`uv run playwright install`
+4. 配置数据库：
+   - **Supabase**：在 `.env` 文件中设置 `SUPABASE_URL` 和 `SUPABASE_KEY`，在 Supabase 中执行 `supabase_schema.sql` 创建表
+   - **SQLite**：在 `.env` 文件中设置 `USE_SQLITE=true`，可选设置 `SQLITE_DB_PATH`（默认为 `stock_signals.db`）
 
 ## 使用方法
-运行主脚本：`python main.py`
+
+### 命令行模式
+运行主脚本：
+- 使用 Supabase：`uv run python main.py`
+- 使用 SQLite：`USE_SQLITE=true uv run python main.py`
+
+### Web界面模式
+启动Web服务器：
+```bash
+# Windows
+start_web.bat
+
+# 或手动启动
+uv run python app.py
+```
+然后在浏览器中访问 `http://localhost:5000`
+
+Web界面功能：
+- 一键启动股票扫描
+- 实时显示扫描进度
+- 查看检测到的信号结果
+- 支持SQLite本地数据库存储
 
 ## 配置说明
 - `THRESHOLD_VOLUME_RATIO`: 成交量比阈值 (默认 0.2)
@@ -31,6 +53,8 @@
 
 ## 技术栈
 - Playwright: 网页自动化和截图
-- Supabase: 云数据库存储
+- Supabase/SQLite: 数据库存储（可选择）
 - Pandas: 数据处理
 - OpenCV + Tesseract: 图像处理和 OCR
+- Flask: Web框架
+- uv: 依赖管理

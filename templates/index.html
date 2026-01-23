@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股票信号分析系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📈 股票信号分析系统</h1>
+            <p>自动检测极致缩量信号</p>
+        </header>
+
+        <div class="scan-section">
+            <div class="scan-controls">
+                <button id="startScanBtn" class="btn btn-primary">
+                    🚀 开始扫描
+                </button>
+                <div id="scanStatus" class="status">
+                    <span id="statusText">准备就绪</span>
+                    <div id="progressBar" class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>📊 检测结果</h2>
+            <button id="refreshBtn" class="btn btn-secondary">🔄 刷新</button>
+
+            <div id="resultsContainer">
+                <div id="loadingSpinner" class="spinner hidden">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+
+                <table id="signalsTable" class="results-table">
+                    <thead>
+                        <tr>
+                            <th>股票代码</th>
+                            <th>信号日期</th>
+                            <th>成交量比</th>
+                            <th>价格变动</th>
+                            <th>近期最大量</th>
+                            <th>当前成交量</th>
+                            <th>当前价格</th>
+                            <th>数据来源</th>
+                            <th>检测时间</th>
+                        </tr>
+                    </thead>
+                    <tbody id="signalsBody">
+                        <tr id="noDataRow">
+                            <td colspan="9" class="no-data">暂无数据，请先运行扫描</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="config-section">
+            <h3>⚙️ 系统配置</h3>
+            <div id="configInfo">
+                <p id="dbType">数据库类型: <span id="dbTypeValue">加载中...</span></p>
+                <p id="dbPath">数据库路径: <span id="dbPathValue">-</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

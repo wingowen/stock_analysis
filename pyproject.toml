@@ -1,0 +1,27 @@
+[project]
+name = "stock-analysis"
+version = "0.1.0"
+description = "Stock analysis MVP for extreme volume contraction signals"
+authors = [
+    {name = "Developer", email = "dev@example.com"},
+]
+requires-python = ">=3.8"
+dependencies = [
+    "playwright",
+    "supabase",
+    "pandas",
+    "python-dotenv",
+    "opencv-python",
+    "pytesseract",
+    "pyeastmoney",
+    "requests",
+    "flask",
+    "flask-cors",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
