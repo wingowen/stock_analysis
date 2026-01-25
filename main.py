@@ -15,8 +15,10 @@ import cv2
 import pytesseract
 import numpy as np
 import requests
-from eastmoney import get_fundamentals
 import sqlite3
+
+# Import data sources
+from data_sources import StockDataSourceFactory, StockDataSource
 
 # Load environment variables
 load_dotenv()
@@ -25,13 +27,18 @@ load_dotenv()
 USE_SQLITE = os.getenv("USE_SQLITE", "false").lower() == "true"
 SQLITE_DB_PATH = os.getenv("SQLITE_DB_PATH", "stock_signals.db")
 
+# Data source setup
+DEFAULT_DATA_SOURCE = os.getenv("DEFAULT_DATA_SOURCE", "akshare")  # Default to AKShare
+
 # Supabase setup
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY) if SUPABASE_URL and SUPABASE_KEY else None
+# Only create Supabase client if not using SQLite
+supabase: Client = None
+if not USE_SQLITE:
+    supabase = create_client(SUPABASE_URL, SUPABASE_KEY) if SUPABASE_URL and SUPABASE_KEY else None
 
 # Constants
-EASTMONEY_BASE_URL = "https://quote.eastmoney.com"
 THRESHOLD_VOLUME_RATIO = 0.2  # 成交量比阈值
 THRESHOLD_PRICE_CHANGE = 0.05  # 价格变动阈值 (5%)
 LOOKBACK_DAYS = 20  # 回溯天数
@@ -65,91 +72,40 @@ def init_sqlite_db(db_path: str):
 
 async def scrape_stock_data(stock_code: str) -> dict | None:
     """
-    Scrape stock data from eastmoney using Playwright.
-    Prefer structured data from JS variables, fallback to screenshot + OCR.
+    Get stock data from the configured data source.
     """
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
-        page = await browser.new_page()
+    try:
+        # Create data source instance based on configuration
+        data_source = StockDataSourceFactory.create_data_source(DEFAULT_DATA_SOURCE)
         
-        try:
-            # Visit stock page
-            url = f"{EASTMONEY_BASE_URL}/{stock_code}.html"
-            await page.goto(url, wait_until="networkidle")
-            
-            # Try to extract structured data from page
-            # Eastmoney often stores data in window objects or data attributes
-            data = await page.evaluate("""
-                () => {
-                    // Try to find stock data in common locations
-                    const priceElement = document.querySelector('.price');
-                    const volumeElement = document.querySelector('.volume');
-                    
-                    return {
-                        price: priceElement ? priceElement.textContent.trim() : null,
-                        volume: volumeElement ? volumeElement.textContent.trim() : null,
-                        // Add more fields as needed
-                    };
-                }
-            """)
-            
-            if data['price'] and data['volume']:
-                return {
-                    'code': stock_code,
-                    'price': float(data['price'].replace(',', '')),
-                    'volume': int(data['volume'].replace(',', '')),
-                    'date': datetime.now().date(),
-                    'source': 'structured'
-                }
-            else:
-                # Fallback to screenshot + OCR
-                screenshot_path = f"screenshots/{stock_code}.png"
-                await page.screenshot(path=screenshot_path, full_page=True)
-                
-                # OCR processing (placeholder - need to implement region detection)
-                # This is a simplified version
-                image = cv2.imread(screenshot_path)
-                # Assume price and volume are in specific regions
-                # You'd need to train or manually define regions
-                price_text = pytesseract.image_to_string(image[100:150, 200:300])  # Example coordinates
-                volume_text = pytesseract.image_to_string(image[150:200, 200:300])  # Example coordinates
-                
-                return {
-                    'code': stock_code,
-                    'price': float(price_text.strip()),
-                    'volume': int(volume_text.strip().replace(',', '')),
-                    'date': datetime.now().date(),
-                    'source': 'ocr'
-                }
-                
-        except Exception as e:
-            print(f"Error scraping {stock_code}: {e}")
+        if data_source:
+            # Use the data source to get stock data
+            return await data_source.get_stock_data(stock_code)
+        else:
+            print(f"Failed to create data source: {DEFAULT_DATA_SOURCE}")
             return None
-        finally:
-            await browser.close()
+    except Exception as e:
+        print(f"Error getting data for {stock_code}: {e}")
+        return None
 
 def get_historical_data(stock_code: str, days: int = LOOKBACK_DAYS) -> pd.DataFrame:
     """
-    Get historical data for signal calculation using pyeastmoney.
+    Get historical data for signal calculation from the configured data source.
     """
     try:
-        # Use pyeastmoney to get historical data
-        # Note: Adjust API calls based on actual library capabilities
-        # This is a simplified example - you may need to adapt
-        data = get_fundamentals(stock_code, 'daily', days)
-        return pd.DataFrame(data)
+        # Create data source instance based on configuration
+        data_source = StockDataSourceFactory.create_data_source(DEFAULT_DATA_SOURCE)
+        
+        if data_source:
+            # Use the data source to get historical data
+            return data_source.get_historical_data(stock_code, days)
+        else:
+            print(f"Failed to create data source: {DEFAULT_DATA_SOURCE}")
     except Exception as e:
         print(f"Error getting historical data for {stock_code}: {e}")
-        # Fallback to dummy data
-        dates = [datetime.now().date() - timedelta(days=i) for i in range(days)]
-        volumes = [1000000 * (0.9 ** i) for i in range(days)]
-        prices = [10.0 + np.random.normal(0, 0.1) for _ in range(days)]
-
-        return pd.DataFrame({
-            'date': dates,
-            'volume': volumes,
-            'price': prices
-        })
+    
+    # Return empty DataFrame if all else fails
+    return pd.DataFrame(columns=['date', 'volume', 'price'])
 
 def detect_signal(stock_code: str, current_data: dict) -> dict | None:
     """
