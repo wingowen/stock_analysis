@@ -1,52 +1,66 @@
-# Data sources for stock information
-# This module provides an abstract base class for data sources and concrete implementations
+"""
+Stock Data Sources Module
 
+提供股票数据源的抽象基类和具体实现：
+- SinaFinanceDataSource: 新浪财经数据源
+- EastMoneyDataSource: 东方财富数据源
+- AKShareDataSource: AKShare数据源(推荐)
+
+使用工厂模式创建数据源实例。
+"""
+
+import re
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional, Any
+
 import pandas as pd
 import requests
-import json
-import akshare as ak
+
+# Optional imports
+try:
+    import akshare as ak
+except ImportError:
+    ak = None
 
 class StockDataSource(ABC):
     """
-    Abstract base class for stock data sources.
+    股票数据源抽象基类。
+    
+    所有数据源实现必须继承此类并实现抽象方法。
     """
     
     @abstractmethod
     async def get_stock_data(self, stock_code: str) -> Optional[Dict[str, Any]]:
         """
-        Get real-time stock data for a given stock code.
+        获取股票实时数据。
         
         Args:
-            stock_code: Stock code in A-share format (e.g., '000001', '600000')
+            stock_code: A股代码 (如 '000001', '600000')
             
         Returns:
-            Dictionary containing stock data or None if failed
+            包含股票数据的字典，失败返回 None
         """
         pass
     
     @abstractmethod
     def get_historical_data(self, stock_code: str, days: int) -> pd.DataFrame:
         """
-        Get historical stock data for a given stock code.
+        获取股票历史数据。
         
         Args:
-            stock_code: Stock code in A-share format
-            days: Number of days to look back
+            stock_code: A股代码
+            days: 回溯天数
             
         Returns:
-            DataFrame containing historical stock data
+            包含历史数据的 DataFrame
         """
         pass
     
     @property
     @abstractmethod
     def source_name(self) -> str:
-        """
-        Get the name of the data source.
-        """
+        """数据源名称。"""
         pass
 
 class SinaFinanceDataSource(StockDataSource):

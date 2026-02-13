@@ -1,16 +1,52 @@
+"""
+股票关系分析模块
+
+提供股票间的相关性分析、聚类分析和网络分析功能。
+
+功能：
+- 计算股票间价格涨跌幅的相关性
+- K-means 聚类分析
+- 构建股票关系网络
+- 分析股票与概念版块的关系
+"""
+
 import sqlite3
+from typing import Dict, List, Optional, Tuple
+
 import pandas as pd
 import numpy as np
-from datetime import datetime
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
 import networkx as nx
 
+# Optional imports
+try:
+    from sklearn.cluster import KMeans
+    from sklearn.preprocessing import StandardScaler
+except ImportError:
+    KMeans = None
+    StandardScaler = None
+
+
 class StockRelationshipAnalyzer:
-    def __init__(self, db_path='stock_history.db'):
-        """初始化分析器"""
+    """
+    股票关系分析器。
+    
+    用于分析多只股票之间的关系，包括相关性、聚类和网络分析。
+    
+    Attributes:
+        db_path: SQLite 数据库路径
+        conn: 数据库连接
+        cursor: 数据库游标
+    """
+    
+    def __init__(self, db_path: str = 'stock_history.db'):
+        """
+        初始化分析器。
+        
+        Args:
+            db_path: SQLite 数据库文件路径
+        """
         self.db_path = db_path
         self.conn = sqlite3.connect(db_path)
         self.cursor = self.conn.cursor()
@@ -70,16 +106,29 @@ class StockRelationshipAnalyzer:
         
         return correlation_matrix
     
-    def cluster_stocks(self, n_clusters=5, start_date=None, end_date=None):
-        """使用K-means对股票进行聚类"""
-        # 获取所有股票数据
+    def cluster_stocks(self, n_clusters: int = 5, start_date: Optional[str] = None, 
+                       end_date: Optional[str] = None) -> Optional[pd.DataFrame]:
+        """
+        使用 K-means 对股票进行聚类。
+        
+        Args:
+            n_clusters: 聚类数量
+            start_date: 开始日期 (格式: 'YYYY-MM-DD')
+            end_date: 结束日期 (格式: 'YYYY-MM-DD')
+            
+        Returns:
+            包含聚类结果的 DataFrame，失败返回 None
+        """
+        if KMeans is None or StandardScaler is None:
+            print("scikit-learn not installed. Please install: pip install scikit-learn")
+            return None
+        
         df = self.get_all_stocks_data(start_date, end_date)
         
         if df.empty:
             print("没有找到数据")
             return None
         
-        # 重塑数据为透视表
         pivot_df = df.pivot(index='日期', columns='股票代码', values='涨跌幅')
         
         # 计算股票的统计特征
@@ -97,10 +146,9 @@ class StockRelationshipAnalyzer:
         scaled_features = scaler.fit_transform(stock_features)
         
         # 聚类
-        kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
         clusters = kmeans.fit_predict(scaled_features)
         
-        # 添加聚类结果
         stock_features['cluster'] = clusters
         
         return stock_features
@@ -283,7 +331,7 @@ class StockRelationshipAnalyzer:
         nx.draw_networkx_edges(G, pos, width=weights, alpha=0.6)
         
         # 绘制标签
-        nx.draw_networkx_labels(G, pos, font_size=8, font_family=['SimHei', 'DejaVu Sans'])
+        nx.draw_networkx_labels(G, pos, font_size=8)
         
         plt.title(f'股票关系网络 (相关性阈值: {threshold})')
         plt.axis('off')

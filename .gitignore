@@ -1,330 +1,72 @@
-user_data/BrowserMetrics-spare.pma
-user_data/first_party_sets.db
-user_data/first_party_sets.db-journal
-user_data/Last Browser
-user_data/Last Version
-user_data/Local State
-user_data/Variations
-user_data/Crashpad/metadata
-user_data/Crashpad/settings.dat
-user_data/Default/Account Web Data
-user_data/Default/Account Web Data-journal
-user_data/Default/Affiliation Database
-user_data/Default/Affiliation Database-journal
-user_data/Default/BookmarkMergedSurfaceOrdering
-user_data/Default/BrowsingTopicsSiteData
-user_data/Default/BrowsingTopicsSiteData-journal
-user_data/Default/BrowsingTopicsState
-user_data/Default/chrome_debug.log
-user_data/Default/DIPS
-user_data/Default/Favicons
-user_data/Default/Favicons-journal
-user_data/Default/heavy_ad_intervention_opt_out.db
-user_data/Default/heavy_ad_intervention_opt_out.db-journal
-user_data/Default/History
-user_data/Default/History-journal
-user_data/Default/LOCK
-user_data/Default/LOG
-user_data/Default/LOG.old
-user_data/Default/Login Data
-user_data/Default/Login Data For Account
-user_data/Default/Login Data For Account-journal
-user_data/Default/Login Data-journal
-user_data/Default/Network Action Predictor
-user_data/Default/Network Action Predictor-journal
-user_data/Default/Preferences
-user_data/Default/PreferredApps
-user_data/Default/README
-user_data/Default/Secure Preferences
-user_data/Default/ServerCertificate
-user_data/Default/ServerCertificate-journal
-user_data/Default/SharedStorage
-user_data/Default/Shortcuts
-user_data/Default/Shortcuts-journal
-user_data/Default/Top Sites
-user_data/Default/Top Sites-journal
-user_data/Default/Web Data
-user_data/Default/Web Data-journal
-user_data/Default/AutofillAiModelCache/LOCK
-user_data/Default/AutofillAiModelCache/LOG
-user_data/Default/AutofillAiModelCache/LOG.old
-user_data/Default/AutofillStrikeDatabase/LOCK
-user_data/Default/AutofillStrikeDatabase/LOG
-user_data/Default/AutofillStrikeDatabase/LOG.old
-user_data/Default/BudgetDatabase/LOCK
-user_data/Default/BudgetDatabase/LOG
-user_data/Default/BudgetDatabase/LOG.old
-user_data/Default/Cache/Cache_Data/data_0
-user_data/Default/Cache/Cache_Data/data_1
-user_data/Default/Cache/Cache_Data/data_2
-user_data/Default/Cache/Cache_Data/data_3
-user_data/Default/Cache/Cache_Data/f_00000c
-user_data/Default/Cache/Cache_Data/f_00000d
-user_data/Default/Cache/Cache_Data/f_00000e
-user_data/Default/Cache/Cache_Data/f_00000f
-user_data/Default/Cache/Cache_Data/f_00001a
-user_data/Default/Cache/Cache_Data/f_00003c
-user_data/Default/Cache/Cache_Data/f_00003d
-user_data/Default/Cache/Cache_Data/f_00003e
-user_data/Default/Cache/Cache_Data/f_00003f
-user_data/Default/Cache/Cache_Data/f_000010
-user_data/Default/Cache/Cache_Data/f_000011
-user_data/Default/Cache/Cache_Data/f_000012
-user_data/Default/Cache/Cache_Data/f_000013
-user_data/Default/Cache/Cache_Data/f_000014
-user_data/Default/Cache/Cache_Data/f_000015
-user_data/Default/Cache/Cache_Data/f_000016
-user_data/Default/Cache/Cache_Data/f_000018
-user_data/Default/Cache/Cache_Data/f_000040
-user_data/Default/Cache/Cache_Data/index
-user_data/Default/Cache/No_Vary_Search/journal.baj
-user_data/Default/Cache/No_Vary_Search/snapshot.baf
-user_data/Default/ClientCertificates/LOCK
-user_data/Default/ClientCertificates/LOG
-user_data/Default/ClientCertificates/LOG.old
-user_data/Default/Code Cache/js/00f935198c58a4f9_0
-user_data/Default/Code Cache/js/2bafa4d05a156f00_0
-user_data/Default/Code Cache/js/3a5e3aa9ef1fc9a0_0
-user_data/Default/Code Cache/js/4b8ef61bf8fdcac9_0
-user_data/Default/Code Cache/js/4ebe36aa2d2b0117_0
-user_data/Default/Code Cache/js/5dcd707cd647009f_0
-user_data/Default/Code Cache/js/06a0c13d6572ed57_0
-user_data/Default/Code Cache/js/6e271776d61e3db9_0
-user_data/Default/Code Cache/js/7e6b6bd9b92a3c4a_0
-user_data/Default/Code Cache/js/8b95afc87b9faaed_0
-user_data/Default/Code Cache/js/8db96f7c9087d5fa_0
-user_data/Default/Code Cache/js/9bfcda733759d4bf_0
-user_data/Default/Code Cache/js/9f37a013ea4f8d1d_0
-user_data/Default/Code Cache/js/10ff4e722b80de4f_0
-user_data/Default/Code Cache/js/013d2d94ba223ff4_0
-user_data/Default/Code Cache/js/24b233a71d1588ce_0
-user_data/Default/Code Cache/js/25d4aa757398ba4e_0
-user_data/Default/Code Cache/js/50cac5cd57a1db1d_0
-user_data/Default/Code Cache/js/58bbe5febfb44a58_0
-user_data/Default/Code Cache/js/65c30d7c3a64e0f9_0
-user_data/Default/Code Cache/js/65de1003cc3deb4a_0
-user_data/Default/Code Cache/js/68e622c8b3cf2cdc_0
-user_data/Default/Code Cache/js/87addeb0a99f36ce_0
-user_data/Default/Code Cache/js/92b78dc65bc0bfda_0
-user_data/Default/Code Cache/js/0173fb2d10fefae2_0
-user_data/Default/Code Cache/js/174f173ba087f85a_0
-user_data/Default/Code Cache/js/183be8cbd834dc37_0
-user_data/Default/Code Cache/js/731b0d3c5041e762_0
-user_data/Default/Code Cache/js/737d091ce7e480f7_0
-user_data/Default/Code Cache/js/866e4f3d0c280b60_0
-user_data/Default/Code Cache/js/991e425617672c7a_0
-user_data/Default/Code Cache/js/1645a38ff85086e1_0
-user_data/Default/Code Cache/js/2041a4ab956145a3_0
-user_data/Default/Code Cache/js/3079e57cbab98c87_0
-user_data/Default/Code Cache/js/4453ab3f50cae18a_0
-user_data/Default/Code Cache/js/6428a0927fb9dcb7_0
-user_data/Default/Code Cache/js/22484c832ce9e201_0
-user_data/Default/Code Cache/js/30569c879cf2ea0a_0
-user_data/Default/Code Cache/js/411309cf67436fc8_0
-user_data/Default/Code Cache/js/418670dfad7f56ad_0
-user_data/Default/Code Cache/js/776842c4d897521f_0
-user_data/Default/Code Cache/js/811206f875db15b7_0
-user_data/Default/Code Cache/js/5043361b6d1edd82_0
-user_data/Default/Code Cache/js/6012501ad8e6cd4b_0
-user_data/Default/Code Cache/js/37281329a03c856c_0
-user_data/Default/Code Cache/js/88500809cfccde68_0
-user_data/Default/Code Cache/js/693204586ddcf634_0
-user_data/Default/Code Cache/js/a8ae6195fff41563_0
-user_data/Default/Code Cache/js/a9d0ef2379711254_0
-user_data/Default/Code Cache/js/a87369a2d7d777aa_0
-user_data/Default/Code Cache/js/ab8fe2e64070d12c_0
-user_data/Default/Code Cache/js/ab899a7380d34d8d_0
-user_data/Default/Code Cache/js/acdc405b0c8f45e0_0
-user_data/Default/Code Cache/js/ad896a4b23162850_0
-user_data/Default/Code Cache/js/b3e33e383e3b5d65_0
-user_data/Default/Code Cache/js/b4bdb9fdb873a4b3_0
-user_data/Default/Code Cache/js/b22c159327c7cac6_0
-user_data/Default/Code Cache/js/b016136e620017a7_0
-user_data/Default/Code Cache/js/b29827ccf3f5f8bb_0
-user_data/Default/Code Cache/js/c9ba63eafa881937_0
-user_data/Default/Code Cache/js/c8182b4b95f563ce_0
-user_data/Default/Code Cache/js/c20268fad1403ad1_0
-user_data/Default/Code Cache/js/cbff8541dcea7e08_0
-user_data/Default/Code Cache/js/cc5350e73489f01b_0
-user_data/Default/Code Cache/js/cf7aa81f99482e3c_0
-user_data/Default/Code Cache/js/d0a952e67d91df5e_0
-user_data/Default/Code Cache/js/d7da8a2b65ce82b3_0
-user_data/Default/Code Cache/js/d772ecf140572b3f_0
-user_data/Default/Code Cache/js/d718730d713f40d1_0
-user_data/Default/Code Cache/js/dea5242d5d283fda_0
-user_data/Default/Code Cache/js/e2c4cf7abda22400_0
-user_data/Default/Code Cache/js/e4b19c6667ea48b7_0
-user_data/Default/Code Cache/js/e8bd850a912c6303_0
-user_data/Default/Code Cache/js/e246b7e560ae25ce_0
-user_data/Default/Code Cache/js/e1171e91f7972b63_0
-user_data/Default/Code Cache/js/e99987cdf3ab0a2e_0
-user_data/Default/Code Cache/js/ec89d9f983155de4_0
-user_data/Default/Code Cache/js/fcb14288822dfe85_0
-user_data/Default/Code Cache/js/fe02f678066af155_0
-user_data/Default/Code Cache/js/index
-user_data/Default/Code Cache/js/index-dir/the-real-index
-user_data/Default/Code Cache/wasm/index
-user_data/Default/Code Cache/wasm/index-dir/the-real-index
-user_data/Default/DawnGraphiteCache/data_0
-user_data/Default/DawnGraphiteCache/data_1
-user_data/Default/DawnGraphiteCache/data_2
-user_data/Default/DawnGraphiteCache/data_3
-user_data/Default/DawnGraphiteCache/index
-user_data/Default/DawnWebGPUCache/data_0
-user_data/Default/DawnWebGPUCache/data_1
-user_data/Default/DawnWebGPUCache/data_2
-user_data/Default/DawnWebGPUCache/data_3
-user_data/Default/DawnWebGPUCache/index
-user_data/Default/Extension Rules/000003.log
-user_data/Default/Extension Rules/CURRENT
-user_data/Default/Extension Rules/LOCK
-user_data/Default/Extension Rules/LOG
-user_data/Default/Extension Rules/MANIFEST-000001
-user_data/Default/Extension Scripts/000003.log
-user_data/Default/Extension Scripts/CURRENT
-user_data/Default/Extension Scripts/LOCK
-user_data/Default/Extension Scripts/LOG
-user_data/Default/Extension Scripts/MANIFEST-000001
-user_data/Default/Extension State/000003.log
-user_data/Default/Extension State/CURRENT
-user_data/Default/Extension State/LOCK
-user_data/Default/Extension State/LOG
-user_data/Default/Extension State/LOG.old
-user_data/Default/Extension State/MANIFEST-000001
-user_data/Default/Feature Engagement Tracker/AvailabilityDB/LOCK
-user_data/Default/Feature Engagement Tracker/AvailabilityDB/LOG
-user_data/Default/Feature Engagement Tracker/AvailabilityDB/LOG.old
-user_data/Default/Feature Engagement Tracker/EventDB/LOCK
-user_data/Default/Feature Engagement Tracker/EventDB/LOG
-user_data/Default/Feature Engagement Tracker/EventDB/LOG.old
-user_data/Default/GCM Store/000003.log
-user_data/Default/GCM Store/CURRENT
-user_data/Default/GCM Store/LOCK
-user_data/Default/GCM Store/LOG
-user_data/Default/GCM Store/LOG.old
-user_data/Default/GCM Store/MANIFEST-000001
-user_data/Default/GPUCache/data_0
-user_data/Default/GPUCache/data_1
-user_data/Default/GPUCache/data_2
-user_data/Default/GPUCache/data_3
-user_data/Default/GPUCache/index
-user_data/Default/Local Storage/leveldb/000003.log
-user_data/Default/Local Storage/leveldb/CURRENT
-user_data/Default/Local Storage/leveldb/LOCK
-user_data/Default/Local Storage/leveldb/LOG
-user_data/Default/Local Storage/leveldb/LOG.old
-user_data/Default/Local Storage/leveldb/MANIFEST-000001
-user_data/Default/Network/Cookies
-user_data/Default/Network/Cookies-journal
-user_data/Default/Network/Network Persistent State
-user_data/Default/Network/NetworkDataMigrated
-user_data/Default/Network/Reporting and NEL
-user_data/Default/Network/Reporting and NEL-journal
-user_data/Default/Network/SCT Auditing Pending Reports
-user_data/Default/Network/TransportSecurity
-user_data/Default/Network/Trust Tokens
-user_data/Default/Network/Trust Tokens-journal
-user_data/Default/PersistentOriginTrials/LOCK
-user_data/Default/PersistentOriginTrials/LOG
-user_data/Default/PersistentOriginTrials/LOG.old
-user_data/Default/Safe Browsing Network/NetworkDataMigrated
-user_data/Default/Safe Browsing Network/Safe Browsing Cookies
-user_data/Default/Safe Browsing Network/Safe Browsing Cookies-journal
-user_data/Default/Segmentation Platform/SegmentInfoDB/LOCK
-user_data/Default/Segmentation Platform/SegmentInfoDB/LOG
-user_data/Default/Segmentation Platform/SegmentInfoDB/LOG.old
-user_data/Default/Segmentation Platform/SignalDB/LOCK
-user_data/Default/Segmentation Platform/SignalDB/LOG
-user_data/Default/Segmentation Platform/SignalDB/LOG.old
-user_data/Default/Segmentation Platform/SignalStorageConfigDB/LOCK
-user_data/Default/Segmentation Platform/SignalStorageConfigDB/LOG
-user_data/Default/Segmentation Platform/SignalStorageConfigDB/LOG.old
-user_data/Default/Session Storage/000003.log
-user_data/Default/Session Storage/CURRENT
-user_data/Default/Session Storage/LOCK
-user_data/Default/Session Storage/LOG
-user_data/Default/Session Storage/LOG.old
-user_data/Default/Session Storage/MANIFEST-000001
-user_data/Default/Sessions/Session_13413795151054929
-user_data/Default/Sessions/Session_13413797419714074
-user_data/Default/Sessions/Tabs_13413795151230641
-user_data/Default/Sessions/Tabs_13413797419923438
-user_data/Default/Shared Dictionary/db
-user_data/Default/Shared Dictionary/db-journal
-user_data/Default/Shared Dictionary/cache/index
-user_data/Default/Shared Dictionary/cache/index-dir/the-real-index
-user_data/Default/Site Characteristics Database/000003.log
-user_data/Default/Site Characteristics Database/CURRENT
-user_data/Default/Site Characteristics Database/LOCK
-user_data/Default/Site Characteristics Database/LOG
-user_data/Default/Site Characteristics Database/LOG.old
-user_data/Default/Site Characteristics Database/MANIFEST-000001
-user_data/Default/Sync Data/LevelDB/000003.log
-user_data/Default/Sync Data/LevelDB/CURRENT
-user_data/Default/Sync Data/LevelDB/LOCK
-user_data/Default/Sync Data/LevelDB/LOG
-user_data/Default/Sync Data/LevelDB/LOG.old
-user_data/Default/Sync Data/LevelDB/MANIFEST-000001
-user_data/Default/WebStorage/QuotaManager
-user_data/Default/WebStorage/QuotaManager-journal
-user_data/Default/chrome_cart_db/LOCK
-user_data/Default/chrome_cart_db/LOG
-user_data/Default/chrome_cart_db/LOG.old
-user_data/Default/commerce_subscription_db/LOCK
-user_data/Default/commerce_subscription_db/LOG
-user_data/Default/commerce_subscription_db/LOG.old
-user_data/Default/discount_infos_db/LOCK
-user_data/Default/discount_infos_db/LOG
-user_data/Default/discount_infos_db/LOG.old
-user_data/Default/discounts_db/LOCK
-user_data/Default/discounts_db/LOG
-user_data/Default/discounts_db/LOG.old
-user_data/Default/optimization_guide_hint_cache_store/LOCK
-user_data/Default/optimization_guide_hint_cache_store/LOG
-user_data/Default/optimization_guide_hint_cache_store/LOG.old
-user_data/Default/parcel_tracking_db/LOCK
-user_data/Default/parcel_tracking_db/LOG
-user_data/Default/parcel_tracking_db/LOG.old
-user_data/Default/shared_proto_db/000003.log
-user_data/Default/shared_proto_db/CURRENT
-user_data/Default/shared_proto_db/LOCK
-user_data/Default/shared_proto_db/LOG
-user_data/Default/shared_proto_db/LOG.old
-user_data/Default/shared_proto_db/MANIFEST-000001
-user_data/Default/shared_proto_db/metadata/000003.log
-user_data/Default/shared_proto_db/metadata/CURRENT
-user_data/Default/shared_proto_db/metadata/LOCK
-user_data/Default/shared_proto_db/metadata/LOG
-user_data/Default/shared_proto_db/metadata/LOG.old
-user_data/Default/shared_proto_db/metadata/MANIFEST-000001
-user_data/GrShaderCache/data_0
-user_data/GrShaderCache/data_1
-user_data/GrShaderCache/data_2
-user_data/GrShaderCache/data_3
-user_data/GrShaderCache/f_000001
-user_data/GrShaderCache/f_000002
-user_data/GrShaderCache/f_000003
-user_data/GrShaderCache/f_000004
-user_data/GrShaderCache/f_000005
-user_data/GrShaderCache/f_000006
-user_data/GrShaderCache/f_000007
-user_data/GrShaderCache/f_000008
-user_data/GrShaderCache/index
-user_data/GraphiteDawnCache/data_0
-user_data/GraphiteDawnCache/data_1
-user_data/GraphiteDawnCache/data_2
-user_data/GraphiteDawnCache/data_3
-user_data/GraphiteDawnCache/index
-user_data/ShaderCache/data_0
-user_data/ShaderCache/data_1
-user_data/ShaderCache/data_2
-user_data/ShaderCache/data_3
-user_data/ShaderCache/index
-user_data/component_crx_cache/metadata.json
-user_data/extensions_crx_cache/metadata.json
-user_data/segmentation_platform/ukm_db
-user_data/segmentation_platform/ukm_db-wal
-.trae/documents/股票筛选系统执行计划.md
-.trae/documents/股票信息源切换计划.md
-__pycache__/data_sources.cpython-310.pyc
-concept/README.mc
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.trae/
+
+# Database
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Playwright / Browser
+user_data/
+
+# Generated files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.csv
+session_storage.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data directory (keep structure but ignore contents)
+data/*
+!data/.gitkeep
+
