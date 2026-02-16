@@ -440,27 +440,33 @@ class StockManager:
             conn = sqlite3.connect(self.db_path)
             
             # 重命名列以匹配数据库表结构
-            column_mapping = {
-                '股票代码': 'stock_code',
-                '日期': 'date',
-                '开盘': 'open',
-                '收盘': 'close',
-                '最高': 'high',
-                '最低': 'low',
-                '成交量': 'volume',
-                '成交额': 'amount',
-                '振幅': 'amplitude',
-                '涨跌幅': 'pct_change',
-                '涨跌额': 'change_amount',
-                '换手率': 'turnover',
-                # 成分股表字段映射
-                '指数代码': 'index_code',
-                '指数名称': 'index_name',
-                '成分券代码': 'stock_code',
-                '成分券名称': 'stock_name',
-                '权重': 'weight',
-                '日期': 'update_date'
-            }
+            # 根据表名使用不同的映射
+            if table_name == 'stock_history':
+                column_mapping = {
+                    '股票代码': 'stock_code',
+                    '日期': 'date',
+                    '开盘': 'open',
+                    '收盘': 'close',
+                    '最高': 'high',
+                    '最低': 'low',
+                    '成交量': 'volume',
+                    '成交额': 'amount',
+                    '振幅': 'amplitude',
+                    '涨跌幅': 'pct_change',
+                    '涨跌额': 'change_amount',
+                    '换手率': 'turnover',
+                }
+            elif table_name == 'index_constituents':
+                column_mapping = {
+                    '指数代码': 'index_code',
+                    '指数名称': 'index_name',
+                    '成分券代码': 'stock_code',
+                    '成分券名称': 'stock_name',
+                    '权重': 'weight',
+                    '日期': 'update_date'
+                }
+            else:
+                column_mapping = {}
             
             # 只映射存在的列
             rename_dict = {k: v for k, v in column_mapping.items() if k in df.columns}
