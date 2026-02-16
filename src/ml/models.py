@@ -272,6 +272,33 @@ class StockDirectionClassifier:
         }
         
         return metrics
+    
+    def get_feature_importance(self) -> pd.DataFrame:
+        """
+        获取特征重要性
+        
+        Returns:
+            特征重要性DataFrame
+        """
+        if not self.is_trained:
+            raise ValueError("Model not trained yet!")
+        
+        if hasattr(self.model, 'feature_importances_'):
+            importance = self.model.feature_importances_
+        elif hasattr(self.model, 'coef_'):
+            # For linear models, use the mean of absolute coefficients across classes
+            coef = self.model.coef_
+            if len(coef.shape) > 1:
+                importance = np.mean(np.abs(coef), axis=0)
+            else:
+                importance = np.abs(coef)
+        else:
+            return pd.DataFrame()
+        
+        return pd.DataFrame({
+            'feature': self.feature_names,
+            'importance': importance
+        }).sort_values('importance', ascending=False)
 
 
 class StockClustering:
