@@ -191,6 +191,67 @@ def get_config():
     })
 
 
+@app.route('/backtest')
+def backtest_page():
+    """渲染回测结果页面。"""
+    return render_template('backtest.html')
+
+
+@app.route('/api/backtest/results')
+def get_backtest_results():
+    """获取回测结果数据。"""
+    import pandas as pd
+    
+    backtest_file = 'data/backtest_results.csv'
+    
+    if not os.path.exists(backtest_file):
+        return jsonify({'error': '回测结果文件不存在，请先运行回测'}), 404
+    
+    try:
+        df = pd.read_csv(backtest_file)
+        
+        # 计算统计指标
+        total_trades = len(df)
+        winning_trades = len(df[df['return_pct'] > 0])
+        losing_trades = len(df[df['return_pct'] <= 0])
+        win_rate = winning_trades / total_trades if total_trades > 0 else 0
+        
+        avg_return = df['return_pct'].mean()
+        median_return = df['return_pct'].median()
+        std_return = df['return_pct'].std()
+        
+        max_return = df['return_pct'].max()
+        min_return = df['return_pct'].min()
+        
+        # 按日期分组计算每日表现
+        df['signal_date'] = pd.to_datetime(df['signal_date'])
+        daily_returns = df.groupby(df['signal_date'].dt.date).agg({
+            'return_pct': 'mean'
+        }).reset_index()
+        daily_returns.columns = ['date', 'avg_return']
+        
+        # 转换为字典
+        results = {
+            'statistics': {
+                'total_trades': int(total_trades),
+                'winning_trades': int(winning_trades),
+                'losing_trades': int(losing_trades),
+                'win_rate': float(win_rate),
+                'avg_return': float(avg_return),
+                'median_return': float(median_return),
+                'std_return': float(std_return),
+                'max_return': float(max_return),
+                'min_return': float(min_return)
+            },
+            'trades': df.to_dict('records'),
+            'daily_returns': daily_returns.to_dict('records')
+        }
+        
+        return jsonify(results)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 # =============================================================================
 # Main Entry
 # =============================================================================

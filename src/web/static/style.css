@@ -218,6 +218,27 @@ header p {
     color: #1f2937;
 }
 
+/* Navigation */
+.nav-links {
+    margin-top: 15px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1rem;
+}
+
+.nav-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
