@@ -53,23 +53,23 @@ class StockRelationshipAnalyzer:
         
     def get_stock_list(self):
         """获取所有股票代码"""
-        self.cursor.execute("SELECT DISTINCT 股票代码 FROM stock_history")
+        self.cursor.execute("SELECT DISTINCT stock_code FROM stock_history")
         result = self.cursor.fetchall()
         return [item[0] for item in result]
     
     def get_stock_data(self, stock_code, start_date=None, end_date=None):
         """获取单个股票的历史数据"""
-        query = "SELECT * FROM stock_history WHERE 股票代码 = ?"
+        query = "SELECT * FROM stock_history WHERE stock_code = ?"
         params = [stock_code]
         
         if start_date:
-            query += " AND 日期 >= ?"
+            query += " AND date >= ?"
             params.append(start_date)
         if end_date:
-            query += " AND 日期 <= ?"
+            query += " AND date <= ?"
             params.append(end_date)
         
-        query += " ORDER BY 日期"
+        query += " ORDER BY date"
         return pd.read_sql_query(query, self.conn, params=params)
     
     def get_all_stocks_data(self, start_date=None, end_date=None):
@@ -78,13 +78,13 @@ class StockRelationshipAnalyzer:
         params = []
         
         if start_date:
-            query += " WHERE 日期 >= ?"
+            query += " WHERE date >= ?"
             params.append(start_date)
         if end_date:
             if start_date:
-                query += " AND 日期 <= ?"
+                query += " AND date <= ?"
             else:
-                query += " WHERE 日期 <= ?"
+                query += " WHERE date <= ?"
             params.append(end_date)
         
         return pd.read_sql_query(query, self.conn, params=params)
@@ -99,7 +99,7 @@ class StockRelationshipAnalyzer:
             return None
         
         # 重塑数据为透视表
-        pivot_df = df.pivot(index='日期', columns='股票代码', values='涨跌幅')
+        pivot_df = df.pivot(index='date', columns='stock_code', values='pct_change')
         
         # 计算相关性矩阵
         correlation_matrix = pivot_df.corr()
@@ -129,7 +129,7 @@ class StockRelationshipAnalyzer:
             print("没有找到数据")
             return None
         
-        pivot_df = df.pivot(index='日期', columns='股票代码', values='涨跌幅')
+        pivot_df = df.pivot(index='date', columns='stock_code', values='pct_change')
         
         # 计算股票的统计特征
         stock_features = pd.DataFrame({
@@ -184,17 +184,17 @@ class StockRelationshipAnalyzer:
             industry_stocks = self.get_stock_list()
         
         # 获取行业股票数据
-        query = "SELECT * FROM stock_history WHERE 股票代码 IN ({})"
+        query = "SELECT * FROM stock_history WHERE stock_code IN ({})"
         placeholders = ','.join(['?'] * len(industry_stocks))
         query = query.format(placeholders)
         
         params = industry_stocks.copy()
         
         if start_date:
-            query += " AND 日期 >= ?"
+            query += " AND date >= ?"
             params.append(start_date)
         if end_date:
-            query += " AND 日期 <= ?"
+            query += " AND date <= ?"
             params.append(end_date)
         
         df = pd.read_sql_query(query, self.conn, params=params)
@@ -204,33 +204,33 @@ class StockRelationshipAnalyzer:
             return None
         
         # 计算行业平均涨跌幅
-        industry_avg = df.groupby('日期')['涨跌幅'].mean().reset_index()
-        industry_avg.columns = ['日期', '行业平均涨跌幅']
+        industry_avg = df.groupby('date')['pct_change'].mean().reset_index()
+        industry_avg.columns = ['date', 'industry_avg_return']
         
         # 计算每个股票与行业平均的相关性
-        pivot_df = df.pivot(index='日期', columns='股票代码', values='涨跌幅')
-        merged_df = pivot_df.merge(industry_avg, on='日期', how='left')
+        pivot_df = df.pivot(index='date', columns='stock_code', values='pct_change')
+        merged_df = pivot_df.merge(industry_avg, on='date', how='left')
         
         correlations = {}
         for stock in pivot_df.columns:
-            correlation = merged_df[stock].corr(merged_df['行业平均涨跌幅'])
+            correlation = merged_df[stock].corr(merged_df['industry_avg_return'])
             correlations[stock] = correlation
         
         return correlations
     
     def get_concept_data(self, concept_name="商业航天", start_date=None, end_date=None):
         """获取概念版块数据"""
-        query = "SELECT * FROM concept_index_history WHERE 概念名称 = ?"
+        query = "SELECT * FROM concept_index_history WHERE concept_name = ?"
         params = [concept_name]
         
         if start_date:
-            query += " AND 日期 >= ?"
+            query += " AND date >= ?"
             params.append(start_date)
         if end_date:
-            query += " AND 日期 <= ?"
+            query += " AND date <= ?"
             params.append(end_date)
         
-        query += " ORDER BY 日期"
+        query += " ORDER BY date"
         return pd.read_sql_query(query, self.conn, params=params)
     
     def analyze_stock_concept_relationship(self, stock_list, concept_name="商业航天", start_date=None, end_date=None):
@@ -243,22 +243,22 @@ class StockRelationshipAnalyzer:
             return None
         
         # 计算概念版块涨跌幅
-        concept_df['涨跌幅'] = ((concept_df['收盘价'] - concept_df['开盘价']) / concept_df['开盘价'] * 100).round(2)
-        concept_df = concept_df[['日期', '涨跌幅']]
-        concept_df.columns = ['日期', '概念涨跌幅']
+        concept_df['pct_change'] = ((concept_df['close'] - concept_df['open']) / concept_df['open'] * 100).round(2)
+        concept_df = concept_df[['date', 'pct_change']]
+        concept_df.columns = ['date', 'concept_pct_change']
         
         # 获取个股数据
-        query = "SELECT * FROM stock_history WHERE 股票代码 IN ({})"
+        query = "SELECT * FROM stock_history WHERE stock_code IN ({})"
         placeholders = ','.join(['?'] * len(stock_list))
         query = query.format(placeholders)
         
         params = stock_list.copy()
         
         if start_date:
-            query += " AND 日期 >= ?"
+            query += " AND date >= ?"
             params.append(start_date)
         if end_date:
-            query += " AND 日期 <= ?"
+            query += " AND date <= ?"
             params.append(end_date)
         
         stock_df = pd.read_sql_query(query, self.conn, params=params)
@@ -271,21 +271,21 @@ class StockRelationshipAnalyzer:
         correlations = {}
         for stock in stock_list:
             # 获取单个股票数据
-            single_stock_df = stock_df[stock_df['股票代码'] == stock][['日期', '涨跌幅']]
+            single_stock_df = stock_df[stock_df['stock_code'] == stock][['date', 'pct_change']]
             
             if single_stock_df.empty:
                 correlations[stock] = 0.0
                 continue
             
             # 合并数据
-            merged_df = pd.merge(single_stock_df, concept_df, on='日期', how='inner')
+            merged_df = pd.merge(single_stock_df, concept_df, on='date', how='inner')
             
             if merged_df.empty:
                 correlations[stock] = 0.0
                 continue
             
             # 计算相关性
-            correlation = merged_df['涨跌幅'].corr(merged_df['概念涨跌幅'])
+            correlation = merged_df['pct_change'].corr(merged_df['concept_pct_change'])
             correlations[stock] = correlation
         
         return correlations
@@ -346,7 +346,7 @@ class StockRelationshipAnalyzer:
 
 def main():
     """主函数"""
-    analyzer = StockRelationshipAnalyzer()
+    analyzer = StockRelationshipAnalyzer('data/stock_data.db')
     
     try:
         # 获取股票列表
